@@ -4,9 +4,15 @@
     font-weight: normal;
     font-style: normal;
   }
-  
+
+  @font-face {
+    font-family: 'fuenteGta';
+    src: url('./assets/fonts/gtamenu.otf');
+    font-weight: normal;
+    font-style: normal;
+  }
   body {
-    font-family: 'fuenteBioshock1', sans-serif;
+    font-family: 'fuenteGta', sans-serif;
   }
   
 *{
@@ -22,7 +28,7 @@ nav{
     width: 100%;
     height: 2rem;
     padding: 1rem;
-    margin-bottom: 2rem;
+
     color: #da7eb2;
     font-size: larger;
     display: flex;
@@ -32,6 +38,7 @@ nav{
 .tituloNav{
     font-size: 2.4rem;
     text-shadow:1px 1px 5px #ffffff;
+    font-family: 'fuenteGta';
 }
 .menu{
     font-size: 2.4rem;
@@ -51,11 +58,13 @@ nav{
 .juego{
     border: 3px solid #8fddd7;
     box-shadow: 1px 2px 5px #000;
-    height: 18rem;
+    height: 22rem;
     width: 15rem;
     background-color:#d569e4;
     display: flex;
     flex-direction: column;
+
+    overflow-y: scroll;
 
 }
 .juego:hover{
@@ -77,4 +86,32 @@ nav{
     height: 2rem;
     color: snow;
     text-shadow: 1px 1px 2px rgb(0, 0, 0);
+}
+
+.descripcion{
+    padding: 4px;
+}
+.generos{
+
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+.genero{
+    background-color: #b8bfc0;
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:2px;
+}
+.generosCheckBox{
+    width: 1rem;
+    height: 1rem;
+}
+.filtros{
+    padding: 1rem;
 }
