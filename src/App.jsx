@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react'
 import './style.css'
-import fondo from'./assets/images/fondoGTA.jpg'
+import ListaJuegoComponent from './components/ListaJuegos'
 
 function App() {
-  const generos = ['mmorpg', 'shooter', 'strategy', 'moba', 'racing', 'sports', 'social', 'sandbox', 'open-world', 'survival', 'pvp', 'pve', 'pixel', 'voxel', 'zombie', 'turn-based', 'first-person', 'third-Person', 'top-down', 'tank', 'space', 'sailing', 'side-scroller', 'superhero', 'permadeath', 'card', 'battle-royale', 'mmo', 'mmofps', 'mmotps', '3d', '2d', 'anime', 'fantasy', 'sci-fi', 'fighting', 'action-rpg', 'action', 'military', 'martial-arts', 'flight', 'low-spec', 'tower-defense', 'horror', 'mmorts']
-  
+  const generos = ['mmorpg', 'shooter', 'strategy', 'moba', 'racing', 'sports', 'social',  'card', 'mmo', 'fantasy', 'fighting', 'action-rpg', 'action']
+  const tags = ['sandbox','open-world', 'survival', 'pvp', 'pve', 'pixel', 'voxel', 'zombie', 'turn-based', 'first-person', 'third-Person', 'top-down','tank', 'space', 'sailing', 'side-scroller', 'superhero', 'permadeath', 'battle-royale','mmofps', 'mmotps', '3d', '2d', 'anime', 'sci-fi', 'military', 'martial-arts', 'flight', 'low-spec', 'tower-defense', 'horror', 'mmorts']
 
   const [juegos, setJuegos] = useState([])
   const [orden, setOrden] = useState('relevance')
   const [generosSeleccionados, setGenerosSeleccionados] = useState([])
+
+  const [filtros, setFiltros] = useState({
+    'sort':'popularity',
+    'platform':'',
+    'tags':[]
+  })
+
 
   const [menuTexto, setMenutexto] = useState('x')
   const cambiarMenu = () =>{
@@ -22,10 +29,66 @@ function App() {
     setGenerosSeleccionados([...generosSeleccionados,genero])
   }
   }
+
+  const seleccionartag = (tag) => {
+    console.log(tag)
+    if(filtros.tags.includes(tag)){
+      console.log('Si')
+      const nuevosTags = filtros.tags.filter((t)=> t !== tag)
+      setFiltros({
+        ...filtros,['tags'] : nuevosTags
+      })
+    }else{
+      setFiltros(
+        {
+          ...filtros,['tags'] : [...filtros.tags,tag]
+        }
+      )
+    }
+    console.log(filtros)
+  }
+
+  const aplicarFiltros = (url) => {
+    if (filtros.tags.length !=0){
+      console.log('entre')
+      url += 'filter'
+      if (filtros.tags.length > 1){
+        url += `?tag=`
+        filtros.tags.forEach((element,index) => {
+          url += `${element}`
+          if (index< filtros.tags.length -1){
+            url += '.'
+          }else{
+            url +='&'
+          }
+        })
+      }
+      else{
+      filtros.tags.forEach((element) => {
+        url += `?tag=${element}&`
+
+        
+      });
+    }}
+    else{
+      url += 'games'
+    }
+    if (filtros.platform){
+      url += `?platform=${filtros.platform}`
+    }
+    if (filtros.sort){
+      url += `?sort-by=${filtros.sort}`
+    }
+    
+
+    return url
+  }
   useEffect(()=>{
 
     const traerJuegos = async () => {
-      const url = 'https://free-to-play-games-database.p.rapidapi.com/api/games';
+      const url = 'https://free-to-play-games-database.p.rapidapi.com/api/';
+      const nuevaUrl = aplicarFiltros(url)
+      console.log(nuevaUrl)
       const options = {
       method: 'GET',
       headers: {
@@ -35,22 +98,22 @@ function App() {
 }
 
 try {
-	const response = await fetch(url, options);
+	const response = await fetch(nuevaUrl, options);
+
 	const result = await response.json();
   setJuegos(result)
-  console.log(result)
 
 } catch (error) {
 	console.error(error);
 }
     }
     traerJuegos()
-  },[])
+  },[filtros])
 
   return (
     <>
     <nav><div className="menu" onMouseOver={cambiarMenu} onMouseLeave={()=>setMenutexto('=')}>{menuTexto}</div><h1 className='tituloNav'>Juegos Gratis</h1></nav>
-      <div className="container" style={{backgroundImage:`url(${fondo})`}}>
+      <div className="container" >
         <div className="filtros">
 
           <div className="ordenarPor">
@@ -62,13 +125,16 @@ try {
               <option value="relevance">Relevancia</option>
             </select>
             </div>
-
-            <div className="generos">
+            
+            <h2>Generos</h2>
+            <div className="generos"> 
             <div className="genero">
               <input type="checkbox" className='generosCheckBox' id="Todos" name="Todos"  onChange={(e)=>{seleccionarGenero(e.target.name)}}/>
               <label htmlFor="Todos">Todos</label>
             </div>
-            {generos.map((genero,index)=>{
+
+            {
+            generos.map((genero,index)=>{
               return (
                 <div className="genero" key={index}>
                   
@@ -76,41 +142,28 @@ try {
                       <label htmlFor={genero}>{genero}</label>
                 </div>
 
-              
+                )
+            })
+            }
+              </div>
+              <h2>Tags</h2>
+              <br />
+            <div className="tags"> 
+            {
+            tags.map((tag,index)=>{
+              return (
+                <div className="tag" key={index}>
+                      <label htmlFor={tag}>{tag}</label>
+                      <input type="checkbox" className='tagsCheckBox' id={tag} name={tag} onChange={(e)=>{seleccionartag(e.target.name)}} />
+                </div>
 
-              
-              )
-            })}
+                )
+            })
+            }
             </div>
 
           </div>
-      {
-        /* Generamos los juegos que devuelve la Api */
-      juegos
-      .filter((juego)=>{
-        if (generosSeleccionados.length > 0 ){
-          return (generosSeleccionados.includes(juego.genre.toLowerCase()) || generosSeleccionados.includes('Todos'))
-        }else{
-          
-          return true
-        }
-      } )
-      .map((juego)=>{
-        
-        return(
-
-        <div className="juego" key={juego.id}>
-          <div className="carta">
-            <div className="imgPlaceHolderCarta">
-              <img src={juego.thumbnail} alt="" className='imgCarta' />
-            </div>
-            <div className="tituloCarta">{juego.title} {juego.genre}
-            </div>
-            <div className="descripcion">{juego.short_description}</div>
-          </div></div>
-      
-      )}
-      )}
+          <ListaJuegoComponent juegos={juegos} generosSeleccionados={generosSeleccionados}></ListaJuegoComponent>
       </div>
     </>
   )
