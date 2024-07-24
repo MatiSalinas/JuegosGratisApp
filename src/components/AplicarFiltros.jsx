@@ -3,10 +3,8 @@ import React from "react";
 const generos = ['mmorpg', 'shooter', 'strategy', 'moba', 'racing', 'sports', 'social',  'card', 'mmo', 'fantasy', 'fighting', 'action-rpg', 'action']
 const tags = ['sandbox','open-world', 'survival', 'pvp', 'pve', 'pixel', 'voxel', 'zombie', 'turn-based', 'first-person', 'third-Person', 'top-down','tank', 'space', 'sailing', 'side-scroller', 'superhero', 'permadeath', 'battle-royale','mmofps', 'mmotps', '3d', '2d', 'anime', 'sci-fi', 'military', 'martial-arts', 'flight', 'low-spec', 'tower-defense', 'horror', 'mmorts']
 
-
-const AplicarFiltros = (url) => {
+export const aplicarFiltros = (url,filtros) => {
     if (filtros.tags.length !=0){
-        console.log('entre')
         url += 'filter'
         if (filtros.tags.length > 1){
         url += `?tag=`
@@ -40,14 +38,42 @@ const AplicarFiltros = (url) => {
     return url
 }
 
-function Filtros(filtros,setFiltros){
+
+
+function Filtros({setFiltros,setGenerosSeleccionados, filtros = [],generosSeleccionados = []}){
+    const seleccionarGenero = (genero) =>{
+        if (generosSeleccionados.includes(genero)){
+          const nuevosGenereosSeleccionados = generosSeleccionados.filter((g)=> g !== genero)
+          setGenerosSeleccionados(nuevosGenereosSeleccionados)  
+        }else{
+        setGenerosSeleccionados([...generosSeleccionados,genero])
+      }
+      }
+    
+    
+      const seleccionartag = (tag) => {
+        if(filtros.tags.includes(tag)){
+          const nuevosTags = filtros.tags.filter((t)=> t !== tag)
+          setFiltros({
+            ...filtros,['tags'] : nuevosTags
+          })
+        }else{
+          setFiltros(
+            {
+              ...filtros,['tags'] : [...filtros.tags,tag]
+            }
+          )
+        }
+      }
+    
+    
     return ( 
     <>
     <div className="filtros">
 
 <div className="ordenarPor">
     <label htmlFor="orderBy" className='labelSort'>Ordenar:</label>
-    <select name="orderBy" id="orderBy"  defaultValue={filtros.sort} value={filtros.sort} onChange={(e)=>{setFiltros({...filtros,['sort']:e.target.value})}}>
+    <select name="orderBy" id="orderBy"  value={filtros.sort} onChange={(e)=>{setFiltros({...filtros,['sort']:e.target.value})}}>
     <option value="release-date" >Fecha de lanzamiento</option>
     <option value="popularity">Popularidad</option>
     <option value="alphabetical ">A-Z</option>

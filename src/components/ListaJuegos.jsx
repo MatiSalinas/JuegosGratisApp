@@ -1,7 +1,6 @@
 import React from "react";
 
 const ListaJuegoComponent =({juegos,generosSeleccionados}) => {
-    console.log(generosSeleccionados)
     if (juegos.length > 0 ){
         return juegos
         .filter((juego)=>{
