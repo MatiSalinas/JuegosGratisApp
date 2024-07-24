@@ -18,8 +18,10 @@ const ListaJuegoComponent =({juegos,generosSeleccionados}) => {
                 <div className="imgPlaceHolderCarta">
                     <img src={juego.thumbnail} alt="" className='imgCarta' />
                 </div>
-                <div className="tituloCarta">{juego.title} {juego.genre}
+                <div className="tituloCarta">{juego.title}
                 </div>
+                <div className="publisher">{juego.publisher} ({juego.release_date})</div>
+                <div className="generoJuego">{juego.genre}</div>
                 <div className="descripcion">{juego.short_description}</div>
                 </div></div>
         

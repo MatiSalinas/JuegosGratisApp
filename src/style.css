@@ -20,17 +20,21 @@
     padding: 0;
 }
 html{
-    background-color: #f8ecec;
-    background-image: url('./assets/images/fondoGTA.jpg');
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #29475e;
+/* background-image: url('./assets/images/fondoGTA.jpg'); */
 }
 
 nav{
-    background-color: #47b7d1;
+    background-color: #184E77;
+    /* background-color: #47b7d1; */
     width: 100%;
     height: 2rem;
     padding: 1rem;
 
-    color: #da7eb2;
+    color: #ffffff;
+    /* color: #da7eb2; */
     font-size: larger;
     display: flex;
     align-items: center;
@@ -38,7 +42,8 @@ nav{
 }
 .tituloNav{
     font-size: 2.4rem;
-    text-shadow:1px 1px 5px #ffffff;
+    text-shadow:1px 1px 5px #000000;
+    /* text-shadow:1px 1px 5px #ffffff; */
     font-family: 'fuenteGta';
 }
 .menu{
@@ -49,26 +54,35 @@ nav{
 
     color: black;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
     gap: 1rem;
+    padding: 1rem;
 
 }
-
+.juegos{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: start;
+    gap: 1rem;
+}
 .juego{
-    border: 3px solid #f1f1f1;
-    box-shadow: 1px 2px 10px #000000;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0px 0px 2px #fcfcfc;
     height: 22rem;
-    width: 15rem;
-    background-color:#cfcfcf;
+    width: 18rem;
+    background-color:#1b2838;
+    /* background-color:#cfcfcf; */
     display: flex;
     flex-direction: column;
-
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+
 }
+
 .juego::-webkit-scrollbar{
     display: none;
 }
@@ -83,36 +97,65 @@ nav{
 }
 .imgCarta{
 
-    width: 15rem;
-    height: 15rem;
+    width: 19rem;
+    height: 10rem;
 }
 .tituloCarta {
-    padding: .3rem;
+    font-family:sans-serif;
     height: 2rem;
     color: snow;
     text-shadow: 1px 1px 2px rgb(0, 0, 0);
     border-top: 1px solid rgb(26, 11, 22);
+    padding-left: 10px;
+    padding-top: 10px;
 }
-
-.descripcion{
-    padding: 4px;
+.publisher{
+    color: #b4b4b4;
+    padding-left: 10px;
+    font-family:Verdana, sans-serif;
 }
-.generos{
-
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding: 1rem;
-}
-.genero{
-    background-color: #b8bfc0;
-    padding: 1rem;
-    border: 1px solid #000;
+.generoJuego{
+    background-color: #243b4b;
+    color: #5ba8d5;
+    font-family: inherit;
+    padding: 5px;
+    margin: 5px;
+    width: max-content;
     border-radius: 4px;
+    text-align: center;
+
+}
+.descripcion{
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+color: #c0c0c0;}
+
+h2{
+    color: #fcfcfc;
+}
+.generos,.tags{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:2px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 33vw;
+    align-items: start;
+    background-color: inherit;
+    width: max-content;
+    gap: .3rem;
+}
+.genero, .tag{
+
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: .5rem;
+    width: max-content;
+    font-family:inherit;
+    text-shadow: 0px 0px 2px rgb(0, 0, 0);
+    color: #ffffff;
+}
+.labelSort{
+    color: #ffffff;
 }
 .generosCheckBox{
     width: 1rem;
@@ -120,23 +163,14 @@ nav{
 }
 .filtros{
     padding: 1rem;
-}
-
-.tags{
     display: flex;
-
-    align-items: center;
-    gap:.7rem;
-    flex-wrap: wrap;
-}
-.tag{
-    background-color: #b8bfc0;
-    padding: 1rem;
-    border: 1px solid #000;
-    border-radius: 4px;
-    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap:2px;
+    align-items: start;
+    width: max-content;
+    max-width: max-content;
+    flex-grow: 1;
+    border: 2px solid #1b2838;
+    box-shadow: 0px 0px 2px #000000;
 
 }

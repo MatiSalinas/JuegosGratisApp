@@ -7,7 +7,6 @@ function App() {
   const tags = ['sandbox','open-world', 'survival', 'pvp', 'pve', 'pixel', 'voxel', 'zombie', 'turn-based', 'first-person', 'third-Person', 'top-down','tank', 'space', 'sailing', 'side-scroller', 'superhero', 'permadeath', 'battle-royale','mmofps', 'mmotps', '3d', '2d', 'anime', 'sci-fi', 'military', 'martial-arts', 'flight', 'low-spec', 'tower-defense', 'horror', 'mmorts']
 
   const [juegos, setJuegos] = useState([])
-  const [orden, setOrden] = useState('relevance')
   const [generosSeleccionados, setGenerosSeleccionados] = useState([])
 
   const [filtros, setFiltros] = useState({
@@ -117,8 +116,8 @@ try {
         <div className="filtros">
 
           <div className="ordenarPor">
-            <label htmlFor="orderBy">Ordenar:</label>
-            <select name="orderBy" id="orderBy" defaultValue={orden}>
+            <label htmlFor="orderBy" className='labelSort'>Ordenar:</label>
+            <select name="orderBy" id="orderBy"  defaultValue={filtros.sort} value={filtros.sort} onChange={(e)=>{setFiltros({...filtros,['sort']:e.target.value})}}>
               <option value="release-date" >Fecha de lanzamiento</option>
               <option value="popularity">Popularidad</option>
               <option value="alphabetical ">A-Z</option>
@@ -153,8 +152,8 @@ try {
             tags.map((tag,index)=>{
               return (
                 <div className="tag" key={index}>
-                      <label htmlFor={tag}>{tag}</label>
                       <input type="checkbox" className='tagsCheckBox' id={tag} name={tag} onChange={(e)=>{seleccionartag(e.target.name)}} />
+                      <label htmlFor={tag}>{tag}</label>
                 </div>
 
                 )
@@ -162,8 +161,9 @@ try {
             }
             </div>
 
-          </div>
+          </div><div className="juegos">
           <ListaJuegoComponent juegos={juegos} generosSeleccionados={generosSeleccionados}></ListaJuegoComponent>
+          </div>
       </div>
     </>
   )
