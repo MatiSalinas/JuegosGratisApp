@@ -32,7 +32,6 @@ function App() {
   const seleccionartag = (tag) => {
     console.log(tag)
     if(filtros.tags.includes(tag)){
-      console.log('Si')
       const nuevosTags = filtros.tags.filter((t)=> t !== tag)
       setFiltros({
         ...filtros,['tags'] : nuevosTags
@@ -44,7 +43,6 @@ function App() {
         }
       )
     }
-    console.log(filtros)
   }
 
   const aplicarFiltros = (url) => {
@@ -161,7 +159,8 @@ try {
             }
             </div>
 
-          </div><div className="juegos">
+          </div>
+          <div className="juegos">
           <ListaJuegoComponent juegos={juegos} generosSeleccionados={generosSeleccionados}></ListaJuegoComponent>
           </div>
       </div>
