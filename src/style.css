@@ -133,7 +133,7 @@ color: #c0c0c0;}
 h2{
     color: #fcfcfc;
 }
-.generos,.tags{
+.generos,.tags,.plataformas{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -143,11 +143,11 @@ h2{
     width: max-content;
     gap: .3rem;
 }
-.genero, .tag{
+.genero, .tag, .Plataforma{
 
     display: flex;
-    justify-content: start;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
     gap: .5rem;
     width: max-content;
     font-family:inherit;
