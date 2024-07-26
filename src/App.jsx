@@ -12,7 +12,7 @@ function App() {
 
   const [filtros, setFiltros] = useState({
     'sort':'popularity',
-    'platform':'pc',
+    'platform':'all',
     'tags':[]
   })
 

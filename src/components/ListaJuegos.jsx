@@ -35,4 +35,4 @@ const ListaJuegoComponent =({juegos,generosSeleccionados,BusquedaString}) => {
     }
     }
 
-    export default React.memo(ListaJuegoComponent);
+    export default ListaJuegoComponent;
