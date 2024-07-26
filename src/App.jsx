@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import './style.css'
 import ListaJuegoComponent from './components/ListaJuegos'
 import Filtros,{aplicarFiltros} from './components/AplicarFiltros'
+import lupa from './assets/images/lupa.svg'
 
 function App() {
   const [juegos, setJuegos] = useState([])
   const [generosSeleccionados, setGenerosSeleccionados] = useState([])
+  const [searchBar,setSearchBar] = useState ('')
+  
 
   const [filtros, setFiltros] = useState({
     'sort':'popularity',
@@ -47,11 +50,21 @@ try {
 
   return (
     <>
-    <nav><div className="menu" onMouseOver={cambiarMenu} onMouseLeave={()=>setMenutexto('=')}>{menuTexto}</div><h1 className='tituloNav'>Juegos Gratis</h1></nav>
+    <nav>
+      <div className="navContainer">
+        <div className="menu" onMouseOver={cambiarMenu} onMouseLeave={()=>setMenutexto('=')}>{menuTexto}</div>
+        <h1 className='tituloNav'>JuegosLibre</h1>
+      </div>
+      <div className="navContainer">
+        <img src={lupa} style={{maxHeight:'100%'}}  />
+        <input type="text" id='busqueda' name='busqueda' value={searchBar} onChange={(e)=>setSearchBar(e.target.value)} className='BarraBusqueda' placeholder='Busca por nombre'/>
+        
+      </div>
+    </nav>
       <div className="container" >
-          <Filtros filtros={filtros} generosSeleccionados={generosSeleccionados} setFiltros={setFiltros} setGenerosSeleccionados={setGenerosSeleccionados}></Filtros>
+          <Filtros filtros={filtros} generosSeleccionados={generosSeleccionados} setFiltros={setFiltros} setGenerosSeleccionados={setGenerosSeleccionados} ></Filtros>
           <div className="juegos">
-          <ListaJuegoComponent juegos={juegos} generosSeleccionados={generosSeleccionados}></ListaJuegoComponent>
+          <ListaJuegoComponent juegos={juegos} generosSeleccionados={generosSeleccionados} BusquedaString={searchBar}></ListaJuegoComponent>
           </div>
       </div>
     </>

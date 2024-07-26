@@ -38,7 +38,14 @@ nav{
     font-size: larger;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: start;
+    gap: 5rem;
+}
+.navContainer{
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    align-items: center;
 }
 .tituloNav{
     font-size: 2.4rem;
@@ -173,4 +180,22 @@ h2{
     border: 2px solid #1b2838;
     box-shadow: 0px 0px 2px #000000;
 
+}
+
+.BarraBusqueda{
+    width: 26rem;
+    height: 2rem;
+    border-radius: 4px;
+    padding: .2rem;
+    background-color: #ffffff;
+    color: #000000;
+}
+.BarraBusqueda:focus{
+    outline: none;
+    border: 1px solid rgb(13, 14, 15);
+}
+
+.BarraBusqueda::placeholder{
+    color: #1b2838;
+    opacity: 60%;
 }

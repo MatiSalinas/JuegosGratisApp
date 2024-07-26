@@ -1,13 +1,14 @@
 import React from "react";
 
-const ListaJuegoComponent =({juegos,generosSeleccionados}) => {
+const ListaJuegoComponent =({juegos,generosSeleccionados,BusquedaString}) => {
     if (juegos.length > 0 ){
         return juegos
         .filter((juego)=>{
-            if (generosSeleccionados.length > 0 ){
-            return (generosSeleccionados.includes(juego.genre.toLowerCase()) || generosSeleccionados.includes('Todos'))
+            if (generosSeleccionados.length > 0 && !BusquedaString){
+                
+            return (generosSeleccionados.includes((juego.genre.toLowerCase()) || generosSeleccionados.includes('Todos')))
             }else{
-            return true
+            return juego.title.toLowerCase().includes(BusquedaString.toLowerCase())
                 }
         })
         .map((juego)=>{
